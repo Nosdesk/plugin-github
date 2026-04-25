@@ -1,0 +1,100 @@
+{
+  "manifest_version": 1,
+  "name": "github-integration",
+  "displayName": "GitHub Integration",
+  "version": "0.1.0",
+  "description": "Link tickets to GitHub issues and view repository information",
+  "license": "BUSL-1.1",
+  "author": "Nosdesk",
+  "repository": "https://github.com/Nosdesk/plugin-github",
+  "homepage": "https://nosdesk.com/plugins/github-integration",
+  "bugs": "https://github.com/Nosdesk/plugin-github/issues",
+  "support_contact": "https://github.com/Nosdesk/plugin-github/discussions",
+  "engines": {
+    "nosdesk": ">=0.1.0",
+    "plugin_api": "1"
+  },
+  "dependencies": {},
+  "categories": [
+    "integrations",
+    "developer-tools"
+  ],
+  "tags": [
+    "github",
+    "issues"
+  ],
+  "screenshots": [],
+  "permissions": [
+    "ticket:read",
+    "ticket:comment",
+    "storage:plugin",
+    "collection:read",
+    "collection:write",
+    "network:api.github.com"
+  ],
+  "auth": {
+    "api.github.com": {
+      "type": "bearer",
+      "secret": "github_token"
+    }
+  },
+  "components": {
+    "GitHubPanel": {
+      "kind": "slot",
+      "slot": "ticket-sidebar",
+      "entry": "GitHubPanel",
+      "label": "GitHub",
+      "context": ["ticket"],
+      "action": { "label": "Link GitHub issue" }
+    }
+  },
+  "events": [
+    "ticket:created",
+    "ticket:updated"
+  ],
+  "collections": {
+    "linked_issues": {
+      "schema_version": 1,
+      "label": "Linked GitHub Issues",
+      "fields": {
+        "ticket_id": { "type": "number", "required": true },
+        "owner": { "type": "string", "required": true },
+        "repo": { "type": "string", "required": true },
+        "issue_number": { "type": "number", "required": true },
+        "issue_title": { "type": "string" },
+        "issue_state": { "type": "string" },
+        "issue_url": { "type": "string" },
+        "issue_author": { "type": "string" },
+        "issue_labels": { "type": "json" },
+        "issue_created_at": { "type": "string" },
+        "issue_updated_at": { "type": "string" }
+      }
+    }
+  },
+  "settings": [
+    {
+      "key": "github_token",
+      "type": "secret",
+      "label": "GitHub Personal Access Token",
+      "description": "Fine-grained: 'Issues' read-only. Classic: 'repo' (private) or 'public_repo' (public only)",
+      "required": true
+    },
+    {
+      "key": "default_owner",
+      "type": "string",
+      "label": "Default Owner/Organization",
+      "description": "Default GitHub owner or organization (e.g., 'nosdesk')",
+      "required": false
+    },
+    {
+      "key": "default_repo",
+      "type": "string",
+      "label": "Default Repository",
+      "description": "Default repository name (e.g., 'helpdesk')",
+      "required": false
+    }
+  ],
+  "lifecycle": {
+    "on_uninstall": "cascade"
+  }
+}

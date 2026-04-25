@@ -1,0 +1,11 @@
+# Build output (when we move to source + compile layout)
+/dist/
+
+# Signed release artefacts stay out of git; they live on GitHub Releases.
+/*.zip
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
