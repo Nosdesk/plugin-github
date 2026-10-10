@@ -68,7 +68,7 @@ Per-release workflow:
 
    ```
    nosdesk-cli plugin sign ./dist \
-       --key ~/.nosdesk-root/root.sk \
+       --key ~/.nosdesk-root/root-1e0fad90.sk \
        --out github-integration-0.2.0.zip \
        --source nosdesk-root
    ```
@@ -127,8 +127,8 @@ Components receive `(api, context)` as props.
 
 ## Trust model
 
-This plugin is signed by the Nosdesk root key. Instances with the
-correct `NOSDESK_ROOT_PUBKEY` baked in verify the signature
+This plugin is signed by the Nosdesk root key. Nosdesk 1.1 and
+later, which compile the root key in, verify the signature
 locally before executing any bundle bytes. The embedded signature
 is also cross-checked against the registry-published
 `publisher_pubkey`, `tier`, and plugin name, so a mix-up between

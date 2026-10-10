@@ -2,7 +2,7 @@
   "manifest_version": 1,
   "name": "github-integration",
   "displayName": "GitHub Integration",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Link tickets to GitHub issues and view repository information",
   "license": "BUSL-1.1",
   "author": "Nosdesk",
